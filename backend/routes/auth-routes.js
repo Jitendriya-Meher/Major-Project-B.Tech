@@ -1,5 +1,6 @@
 const express = require("express");
-const { genetrateOTPSignup, signUp, generateOtpForgotonPassword, logIn, resetPassword } = require("../controller/auth-controllers");
+const { signUp, logIn, resetPassword } = require("../controller/auth-controllers");
+const { genetrateOTPSignup, generateOtpForgotonPassword } = require("../controller/otp-controllers");
 const authRoutes = express.Router();
 
 authRoutes.route("/otp/signup").post(genetrateOTPSignup);

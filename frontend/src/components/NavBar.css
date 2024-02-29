@@ -1,0 +1,7 @@
+.navbar .active{
+    @apply text-gray-50;
+}
+
+.nav .active button{
+    @apply text-gray-50 bg-richblack-700 border-richblack-200;
+}

@@ -1,86 +1,9 @@
 const OtpModel = require("../models/otp-model");
 const UserModel = require("../models/user-model");
-const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 
 require("dotenv").config();
-
-// mail transporter
-let transporter = nodemailer.createTransport({
-    host:process.env.MAIL_HOST,
-    auth:{
-        user : process.env.MAIL_USER,
-        pass : process.env.MAIL_PASS
-    }
-});
-
-
-const genetrateOTPSignup = async (req, res) => {
-
-    try{    
-
-        const { email, username } = req.body;
-
-        if( !email || !username ){
-            return res.json({
-                message:"Please fill all required fields",
-                success: false
-            });
-        }
-
-        //  check if user is already exis or not
-        const existingUser = await UserModel.findOne({email: email});
-
-        if( existingUser){
-            return res.json({
-                message:"User already exists please log in",
-                success: false
-            });
-        }
-
-        // create an otp
-        var otp = otpGenerator.generate(6, {
-            upperCaseAlphabets: false,
-            lowerCaseAlphabets: false,
-            specialChars: false,
-        });
-
-        const otpPayload = await OtpModel.create({
-            email,
-            otp
-        });
-
-        const info = await transporter.sendMail({
-            from: "jitenkvk@gmail.com", // sender address
-            to: email, // list of receivers
-            subject: "new opt generated", // Subject line
-            html: `<div style="background-color:yellow;padding:0.5rem ">
-  
-                    <p style="color:blue;text-align:center;font-size:2.5rem;font-weight:600;">
-                    Welcome to the poject by Jikksss and Sam we heartily wecome your involvement into this projects exploration
-                    </p>
-                    
-                    <p style="color:blue;text-align:center;font-size:2rem;font-weight:600;">Your Otp for Sign Up is : <i>${otp}</i> </p>
-                    
-                </div>`, // html body
-        });
-
-        return res.json({
-            success: true,
-            message: `OPT has been send to your email ${username}`,
-            otpPayload
-        });
-
-    }
-    catch(err){
-        return res.json({
-            success: false,
-            message: err.message
-        });
-    }
-}
 
 
 const signUp = async (req,res) => {
@@ -213,71 +136,6 @@ const logIn = async (req, res) => {
 
 }
 
-const generateOtpForgotonPassword = async (req, res) => {
-
-    try{    
-
-        const { email } = req.body;
-
-        if( !email ){
-            return res.json({
-                message:"Please fill all required fields",
-                success: false
-            });
-        }
-
-        //  check if user is already exis or not
-        const existingUser = await UserModel.findOne({email: email});
-
-        if( !existingUser){
-            return res.json({
-                message:"Please sign up first",
-                success: false
-            });
-        }
-
-        // create an otp
-        var otp = otpGenerator.generate(6, {
-            upperCaseAlphabets: false,
-            lowerCaseAlphabets: false,
-            specialChars: false,
-        });
-
-        const otpPayload = await OtpModel.create({
-            email,
-            otp
-        });
-
-        const info = await transporter.sendMail({
-            from: "jitenkvk@gmail.com", // sender address
-            to: email, // list of receivers
-            subject: "new opt generated", // Subject line
-            html: `<div style="background-color:yellow;padding:0.5rem">
-  
-                    <p style="color:blue;text-align:center;font-size:2.5rem;font-weight:600;">
-                    Welcom to Jiksss... & Sam work
-                    </p>
-                    
-                    <p style="color:blue;text-align:center;font-size:2rem;font-weight:600;">Your Otp for reset password is : <i>${otp}</i> </p>
-                    
-                </div>`, // html body   
-        });
-
-        return res.json({
-            success: true,
-            message: `OPT has been send to your email`,
-            otpPayload
-        });
-
-    }
-    catch(err){
-        return res.json({
-            success: false,
-            message: err.message
-        });
-    }
-}
-
 
 const resetPassword = async ( req, res ) => {
 
@@ -343,4 +201,5 @@ const resetPassword = async ( req, res ) => {
 
 } 
 
-module.exports = { genetrateOTPSignup, signUp, generateOtpForgotonPassword, logIn , resetPassword};
+
+module.exports = { signUp, logIn , resetPassword};

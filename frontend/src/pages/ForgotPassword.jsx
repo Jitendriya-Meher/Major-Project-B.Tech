@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { PiSignInBold } from 'react-icons/pi'
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -9,13 +10,14 @@ const ForgotPassword = () => {
     const [email,setEmail] = useState("");
     const navigate = useNavigate();
     const [disabledButton, setDisabledButton] = useState(false);
+    const {baseURL} = useSelector((state) => (state.auth));
 
     async function submitHandler(){
 
         setDisabledButton(true);
 
         try{
-            const res = await axios.post("http://localhost:4000/api/auth/otp/forgotpassword",{email});
+            const res = await axios.post(`${baseURL}/api/auth/otp/forgotpassword`,{email});
             const data = await res.data;
 
             if( data.success){

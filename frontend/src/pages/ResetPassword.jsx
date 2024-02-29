@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { PiSignInBold } from 'react-icons/pi';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -16,6 +17,7 @@ const ResetPassword = () => {
 
     const {email} = useParams();
     const navigate = useNavigate();
+    const {baseURL} = useSelector((state) => (state.auth));
 
     async function submitHandler(){
 
@@ -34,7 +36,7 @@ const ResetPassword = () => {
             };
             console.log(payload);
 
-            const res = await axios.post("http://localhost:4000/api/auth/resetpassword",payload);
+            const res = await axios.post(`${baseURL}/api/auth/resetpassword`,payload);
             const data = await res.data;
 
             if( data.success){
@@ -68,7 +70,7 @@ const ResetPassword = () => {
                 OTP
                 <span className='text-pink-200'> *</span>
                 </p>
-                <input type="email" name="email"
+                <input type="text"
                 value={otp}
                 onChange={(e)=>{
                     setOtp(e.target.value);

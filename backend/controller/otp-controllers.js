@@ -34,7 +34,7 @@ const genetrateOTPSignup = async (req, res) => {
 
         if( existingUser){
             return res.json({
-                message:"User already exists please log in",
+                message:"User already exists with this email, please log in",
                 success: false
             });
         }
@@ -108,7 +108,7 @@ const generateOtpForgotonPassword = async (req, res) => {
 
         if( !existingUser){
             return res.json({
-                message:"Please sign up first",
+                message:"User not found with this email, please sign up first",
                 success: false
             });
         }

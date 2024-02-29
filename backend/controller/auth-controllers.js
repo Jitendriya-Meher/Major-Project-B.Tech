@@ -24,7 +24,7 @@ const signUp = async (req,res) => {
 
         if( existingUser){
             return res.json({
-                message:"User already exists please log in",
+                message:"User already exists with this email, please log in",
                 success: false
             });
         }
@@ -100,7 +100,7 @@ const logIn = async (req, res) => {
 
         if( !existingUser){
             return res.json({
-                message:"Please sign up first",
+                message:"User not found with this email, please sign up first",
                 success: false
             });
         }
@@ -111,7 +111,7 @@ const logIn = async (req, res) => {
         if( !isCorrectPassword){
             return res.json({
                 success: false,
-                message: "Paswords do not match"
+                message: "Please enter correct password"
             });
         }
 
@@ -148,7 +148,7 @@ const resetPassword = async ( req, res ) => {
 
         if( !existingUser ){
             return res.json({
-                message:"User not found please sign up first",
+                message:"User not found with this email, please sign up first",
                 success: false
             })
         }

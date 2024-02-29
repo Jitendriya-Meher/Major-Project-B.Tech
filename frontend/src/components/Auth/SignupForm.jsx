@@ -5,8 +5,11 @@ import axios from 'axios';
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { PiSignInBold } from 'react-icons/pi';
+import { useSelector } from 'react-redux';
 
 const SignupForm = () => {
+
+    const {baseURL} = useSelector((state) => (state.auth));
 
     const [showPassword1,setShowPassword1] = useState(false);
     const [showPassword2,setShowPassword2] = useState(false);
@@ -35,7 +38,7 @@ const SignupForm = () => {
                 username
             };
 
-            const res = await axios.post("http://localhost:4000/api/auth/otp/signup",otpPayload);
+            const res = await axios.post(`${baseURL}/api/auth/otp/signup`,otpPayload);
 
             const data = await res.data;
             // console.log(data);
@@ -78,7 +81,7 @@ const SignupForm = () => {
         };
 
         try{
-            const res = await axios.post("http://localhost:4000/api/auth/signup",userPayload);
+            const res = await axios.post(`${baseURL}/api/auth/signup`,userPayload);
 
             const data = await res.data;
             console.log(data);

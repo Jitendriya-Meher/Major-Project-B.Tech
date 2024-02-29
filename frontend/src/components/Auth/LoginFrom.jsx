@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {AiOutlineEye,AiOutlineEyeInvisible} from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
 import { PiSignInBold } from "react-icons/pi";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { logInAuth } from '../../store/Slices/authSlice';
@@ -14,6 +14,7 @@ const LoginFromForm = () => {
         password:""
     });
     const dispatch = useDispatch();
+    const {baseURL} = useSelector((state) => (state.auth));
 
     function changeHandler(e){
         const {name,value} = e.target;
@@ -42,7 +43,7 @@ const LoginFromForm = () => {
                 email: formData.email
             };
 
-            const res = await axios.post("http://localhost:4000/api/auth/login",userPayload);
+            const res = await axios.post(`${baseURL}/api/auth/login`,userPayload);
             const data = await res.data;
 
             if( data.success){
@@ -54,7 +55,8 @@ const LoginFromForm = () => {
                     username: data.existingUser.username,
                     token: data.token,
                     address: data.existingUser.address,
-                    phone: data.existingUser.phone
+                    phone: data.existingUser.phone,
+                    isAdmin: data.existingUser.isAdmin
                 };
                 dispatch(logInAuth(payload));
             }

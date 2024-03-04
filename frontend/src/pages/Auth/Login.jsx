@@ -4,9 +4,9 @@ import loginImg from "../../assets/login.png";
 function Login() {
   return (
     <Template
-      title="Welcome Back"
-      description1="Build skills for today, tomorrow, and beyond."
-      description2="Education to future-proof your career."
+      title=""
+      description1=""
+      description2=""
       image={loginImg}
       formType="login"
     />

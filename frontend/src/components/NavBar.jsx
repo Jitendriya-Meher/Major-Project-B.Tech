@@ -10,15 +10,15 @@ import { toast } from 'react-toastify';
 
 const NavBar = () => {
 
-
     const {isLoggedin} = useSelector(state=>state.auth);
     const dispatch = useDispatch();
 
   return (
     <div className='flex justify-between items-center w-11/12 max-w-[1160px] py-4 mx-auto flex-wrap gap-y-4 gap-x-8'>
 
-     <Link to='/' className=' mx-auto'>
-        <img src={logo} alt='logo' width={160} height={32} loading='lazy'></img>
+     <Link to='/' className=' mx-auto flex gap-1 justify-center items-start text-white text-xl font-semibold'>
+        {/* <img src={logo} alt='logo' width={160} height={32} loading='lazy'></img> */}
+        <span>Ecommerce</span>
      </Link>
 
      <nav className='navbar mx-auto'>
@@ -48,10 +48,17 @@ const NavBar = () => {
                 <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Sign up</button>
             </NavLink>
         }
+
         {
             isLoggedin &&
             <NavLink to="/dashboard">
                 <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Dashboard</button>
+            </NavLink>
+        }
+        {
+            isLoggedin &&
+            <NavLink to="/profile">
+                <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Profile</button>
             </NavLink>
         }
         {

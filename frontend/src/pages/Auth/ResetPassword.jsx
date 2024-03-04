@@ -25,6 +25,7 @@ const ResetPassword = () => {
 
         if( password !== confirmPassword ){
             toast.error("password and confirm password do not match");
+            setDisabledButton(false);
             return;
         }
 

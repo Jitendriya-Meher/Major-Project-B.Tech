@@ -1,5 +1,5 @@
-import Template from "../components/Auth/Template";
-import signupImg from "../assets/signup.png";
+import Template from "../../components/Auth/Template";
+import signupImg from "../../assets/signup.png";
 
 function Signup({ setIsLoggedIn }) {
   return (

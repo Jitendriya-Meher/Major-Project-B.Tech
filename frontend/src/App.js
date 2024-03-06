@@ -16,6 +16,7 @@ import ProfileHome from "./components/Profile/ProfileHome";
 import ChangePfofile from "./pages/Profile/ChangeProfile";
 import ChangePassword from "./pages/Profile/ChangePassword";
 import DeleteAccount from "./pages/Profile/DeleteAccount";
+import AdminPage from "./pages/Admin/AdminPage";
 
 function App() {
 
@@ -51,6 +52,8 @@ function App() {
         <Route path="/profile/password" element={<ChangePassword></ChangePassword>}></Route>
         <Route path="/profile/delete" element={<DeleteAccount></DeleteAccount>}></Route>
       </Route>
+
+      <Route path="/admin" element={<AdminPage></AdminPage>}></Route>
 
     </Routes>
 

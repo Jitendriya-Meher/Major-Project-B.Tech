@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 
 const NavBar = () => {
 
-    const {isLoggedin} = useSelector(state=>state.auth);
+    const {isLoggedin, isAdmin} = useSelector(state=>state.auth);
     const dispatch = useDispatch();
 
   return (
@@ -49,6 +49,12 @@ const NavBar = () => {
             </NavLink>
         }
 
+        {
+            isAdmin &&
+            <NavLink to="/admin">
+                <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Admin</button>
+            </NavLink>
+        }
         {
             isLoggedin &&
             <NavLink to="/dashboard">

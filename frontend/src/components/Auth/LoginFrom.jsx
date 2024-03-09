@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { logInAuth } from '../../store/Slices/authSlice';
+import { setCartItem } from '../../store/Slices/cartSlice';
 
 const LoginFromForm = () => {
 
@@ -60,6 +61,9 @@ const LoginFromForm = () => {
                     isAdmin: data.existingUser.isAdmin
                 };
                 dispatch(logInAuth(payload));
+                // console.log("data",data);
+                // console.log("cart",data.existingUser.cart);
+                dispatch(setCartItem(data.existingUser.cart));
             }
             else{
                 toast.error(data.message);

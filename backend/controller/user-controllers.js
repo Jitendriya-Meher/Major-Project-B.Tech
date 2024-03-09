@@ -145,4 +145,29 @@ const deleteUser = async ( req, res) => {
 
 }
 
-module.exports = { editUser, editPassword, deleteUser };
+const logOutUser = async (req, res) => {
+    try{
+        const userId = req.userId;
+        const { carts} = req.body;
+
+        const updatedUser = await UserModel.findByIdAndUpdate(userId,{
+            cart: carts
+        },{
+            new: true
+        });
+
+        return res.json({
+            message: " user logout successfully",
+            success: true,
+            updatedUser
+        });
+    }
+    catch(err){
+        return res.json({
+            message: err.message,
+            success: false
+        });
+    }
+}
+
+module.exports = { editUser, editPassword, deleteUser , logOutUser};

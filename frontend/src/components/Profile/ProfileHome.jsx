@@ -50,7 +50,8 @@ const ProfileHome = () => {
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                     variant="dot"
                 >
-                    <Avatar alt="Remy Sharp" sx={{ width: 160, height: 160 }}/>
+                    <Avatar alt="Remy Sharp" sx={{ width: 160, height: 160}} className=' flex items-center justify-center'>
+                    </Avatar>
                 </StyledBadge>
             </div>
             <p>

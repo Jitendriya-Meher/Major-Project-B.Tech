@@ -17,6 +17,8 @@ import ChangePfofile from "./pages/Profile/ChangeProfile";
 import ChangePassword from "./pages/Profile/ChangePassword";
 import DeleteAccount from "./pages/Profile/DeleteAccount";
 import AdminPage from "./pages/Admin/AdminPage";
+import Product from "./pages/Products/Product";
+import Cart from "./pages/Products/Cart";
 
 function App() {
 
@@ -52,6 +54,17 @@ function App() {
         <Route path="/profile/password" element={<ChangePassword></ChangePassword>}></Route>
         <Route path="/profile/delete" element={<DeleteAccount></DeleteAccount>}></Route>
       </Route>
+
+      <Route path="/product/:id" element={
+        <PrivateRoute>
+          <Product></Product>
+        </PrivateRoute>
+      }></Route>
+      <Route path="/cart" element={
+        <PrivateRoute>
+          <Cart></Cart>
+        </PrivateRoute>
+      }></Route>
 
       <Route path="/admin" element={<AdminPage></AdminPage>}></Route>
 

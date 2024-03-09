@@ -1,17 +1,46 @@
 
 import React from 'react';
 import logo from "../assets/Logo.svg";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "./NavBar.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutAuth } from '../store/Slices/authSlice';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 
 const NavBar = () => {
 
-    const {isLoggedin, isAdmin} = useSelector(state=>state.auth);
+    const {isLoggedin, isAdmin, token, baseURL} = useSelector(state=>state.auth);
+    const { carts} = useSelector((state) => (state.cart));
+    const navigate = useNavigate();
+
     const dispatch = useDispatch();
+
+    const logoutUser = async () => {
+        try{
+            const res = await axios.post(`${baseURL}/api/user/logout`,{
+                carts
+            },{
+                headers:{
+                    Authorization: token
+                }
+            });
+            const data = await res.data;
+
+            if( data.success){
+                toast.success(data.message);
+                navigate("/login");
+                dispatch(logOutAuth());
+            }
+            else{
+                toast.error(data.message);
+            }
+        }
+        catch(err){
+            toast.error(err.message);
+        }
+    }
 
   return (
     <div className='flex justify-between items-center w-11/12 max-w-[1160px] py-4 mx-auto flex-wrap gap-y-4 gap-x-8'>
@@ -58,7 +87,7 @@ const NavBar = () => {
         {
             isLoggedin &&
             <NavLink to="/dashboard">
-                <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Dashboard</button>
+                <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Shop</button>
             </NavLink>
         }
         {
@@ -69,14 +98,14 @@ const NavBar = () => {
         }
         {
             isLoggedin &&
-            <Link to="/">
-                <button onClick={
-                    () => {
-                        dispatch(logOutAuth());
-                        toast.success("Logged Out!");
-                    }
-                } className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Log Out</button>
-            </Link>
+            <NavLink to="/cart">
+                <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Cart</button>
+            </NavLink>
+        }
+        {
+            isLoggedin &&
+            <button onClick={logoutUser}
+                className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Log Out</button>
         }
      </div>
 

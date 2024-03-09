@@ -29,7 +29,8 @@ const userSchema = new mongoose.Schema({
     isAdmin:{
         type: Boolean,
         default:false,
-    }
+    },
+    cart:[]
 },{
     timestamps:true
 });

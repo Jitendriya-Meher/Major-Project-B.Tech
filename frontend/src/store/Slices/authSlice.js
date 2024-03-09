@@ -59,8 +59,10 @@ export const authSlice = createSlice({
         localStorage.removeItem("email");
         localStorage.removeItem("token");
         localStorage.removeItem("isLoggedin");
+        localStorage.removeItem("isAdmin");
         localStorage.removeItem("address");
         localStorage.removeItem("phone");
+        localStorage.removeItem("carts");
       },
       setLoading:(state,action) => {
         state.loading = action.payload;

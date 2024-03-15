@@ -19,6 +19,8 @@ import DeleteAccount from "./pages/Profile/DeleteAccount";
 import AdminPage from "./pages/Admin/AdminPage";
 import Product from "./pages/Products/Product";
 import Cart from "./pages/Products/Cart";
+import AdminRoutes from "./components/AdminRoutes";
+import AddProducts from "./components/Admin/AddProducts";
 
 function App() {
 
@@ -66,7 +68,14 @@ function App() {
         </PrivateRoute>
       }></Route>
 
-      <Route path="/admin" element={<AdminPage></AdminPage>}></Route>
+      <Route path="/admin" element={
+        <AdminRoutes>
+          <AdminPage>
+          </AdminPage>
+        </AdminRoutes>
+      }>
+        <Route path="/admin/addproducts" element={<AddProducts></AddProducts>}></Route>
+      </Route>
 
     </Routes>
 

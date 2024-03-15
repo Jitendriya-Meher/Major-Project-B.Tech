@@ -7,8 +7,8 @@ const AdminPage = () => {
 
         <div className=" w-full bg-gray-900 px-4 py-3 flex flex-wrap gap-4 items-center justify-center border border-gray-800 rounded-md md:flex-col md:max-w-[250px] md:justify-start md:pt-10">
 
-            <NavLink to="/admin" className=" md:w-full">
-                <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700 w-full'>
+            <NavLink to="/admin/addproducts" className=" md:w-full">
+                <button className='py-[8px] px-[12px] rounded-[8px] border border-richblack-700 w-full bg-blue-700'>
                     Add Products
                 </button>
             </NavLink>

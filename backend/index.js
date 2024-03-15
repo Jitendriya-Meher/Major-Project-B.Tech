@@ -26,10 +26,12 @@ dbConnect();
 // import routes
 const authRoutes = require("./routes/auth-routes");
 const userRoutes = require("./routes/user-routes");
+const productRoutes = require("./routes/product-routes");
 
 // mount routes
 app.use("/api/auth",authRoutes);
 app.use("/api/user",userRoutes);
+app.use("/api/product",productRoutes);
 
 
 app.get('/',(req,res)=>{

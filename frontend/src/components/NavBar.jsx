@@ -1,6 +1,6 @@
 
 import React from 'react';
-import logo from "../assets/Logo.svg";
+import logo from "../assets/WhatsApp Image 2024-03-15 at 22.54.27_5ad83739.jpg";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "./NavBar.css"
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,9 +45,9 @@ const NavBar = () => {
   return (
     <div className='flex justify-between items-center w-11/12 max-w-[1160px] py-4 mx-auto flex-wrap gap-y-4 gap-x-8'>
 
-     <Link to='/' className=' mx-auto flex gap-1 justify-center items-start text-white text-xl font-semibold'>
-        {/* <img src={logo} alt='logo' width={160} height={32} loading='lazy'></img> */}
-        <span>Ecommerce</span>
+     <Link to='/' className=' mx-auto flex gap-1 justify-center items-center text-white text-xl font-semibold'>
+        <img src={logo} alt='logo' width={64} height={64} className=' rounded-full' loading='lazy'></img>
+        <span>shopaholics.in</span>
      </Link>
 
      <nav className='navbar mx-auto'>

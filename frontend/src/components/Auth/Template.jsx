@@ -28,7 +28,7 @@ const Template = (props) => {
 
         <div className="relative w-11/12 max-w-[450px] mx-auto hidden md:block">
             <img src={frameImage} width={558} height={504} loading='lazy' alt=""
-            className=''
+            className=' rounded-sm'
              />
             <img src={image} width={558} height={504} loading='lazy' alt="" 
                 className='absolute -top-4 right-4'

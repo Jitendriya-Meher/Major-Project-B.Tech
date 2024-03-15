@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import all_product from '../../assets/all_product';
 import start_icon from "../../assets/star_icon.png";
 import start_dull_icon from "../../assets/star_dull_icon.png";
 import "./Product.css";
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/Slices/cartSlice';
+import axios from 'axios';
 
 const Product = () => {
 
     const { id } = useParams();
-    const product = all_product.find((item) => (
-        item.id == id
-    ));
+    const [product,setProduct] = useState(null);
+    const {baseURL,token} = useSelector(s=>s.auth);
+    
     const dispatch = useDispatch();
 
     const add = async (id) =>{
@@ -25,6 +26,37 @@ const Product = () => {
             toast.error(err.message);
         }
     }
+
+    const getAllProducts = async () => {
+        try{
+          const res = await axios.get(`${baseURL}/api/product/${id}`,{
+            headers:{
+              Authorization: token
+            }
+          });
+          const data = await res.data;
+          console.log(data);
+    
+          if( data.success){
+            toast.success(data.message);
+            setProduct(data.product);
+          }
+          else{
+            toast.error(data.message);
+          }
+        }
+        catch(err){
+          toast.error(err.message);
+        }
+      }
+    
+      useEffect(()=>{
+        getAllProducts();
+      },[]);
+
+      if( !product){
+        return <div className=""></div>
+      }
 
   return (
     <div className='productdisplay bg-gray-50 p-2 rounded-md'>
@@ -61,15 +93,15 @@ const Product = () => {
 
             <div className="productdisplay-right-prices">
                 <div className="productdisplay-right-price-old">
-                    ₹{product.old_price}
+                    ₹{product.oldPrice}
                 </div>
                 <div className="productdisplay-right-price-new">
-                    ₹{product.new_price}
+                    ₹{product.newPrice}
                 </div>
             </div>
 
             <div className="productdisplay-right-description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit ullam laborum esse cupiditate libero earum amet placeat impedit voluptate vel accusantium, dignissimos sequi veniam illum aliquam magni accusamus expedita architecto nostrum veritatis. Vero eveniet odio, magni nostrum porro dignissimos! Quisquam nostrum ducimus consectetur dicta officia saepe deserunt beatae nam quod.
+                {product.description}
             </div>
 
             <div className="productdisplay-right-size">
@@ -96,7 +128,7 @@ const Product = () => {
             </div>
 
             <button onClick={() => {
-                add(product.id);
+                add(product);
             }}>
                 ADD TO CART
             </button>
@@ -105,7 +137,7 @@ const Product = () => {
                 <span>
                     Category :
                 </span>
-                &nbsp;Women, T-Shirt, Crop Top
+                &nbsp;{product.category}, T-Shirt
             </p>
             <p className="productdisplay-right-category">
                 <span>

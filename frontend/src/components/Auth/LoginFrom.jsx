@@ -129,7 +129,7 @@ const LoginFromForm = () => {
         disabled={disabledButton}
         >
             <p className="text-[1.1rem]">
-                Sign In
+                Log In
             </p>
             <PiSignInBold size={26}></PiSignInBold>
         </button>

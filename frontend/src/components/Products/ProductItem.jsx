@@ -5,7 +5,7 @@ import "./ProductItem.css"
 const ProductItem = ({product}) => {
   return (
     <div className='item bg-gray-800/80 p-2'>
-        <Link to={`/product/${product.id}`} onClick={window.scrollTo(0,0)}>
+        <Link to={`/product/${product._id}`} onClick={window.scrollTo(0,0)}>
             <img src={product.image} alt="item" />
         </Link>
         <p>
@@ -16,12 +16,12 @@ const ProductItem = ({product}) => {
         <div className="item-prices">
             <div className="item-price-new">
                 ₹{
-                    product.new_price
+                    product.newPrice
                 }
             </div>
             <div className="item-price-old">
                 ₹{
-                    product.old_price 
+                    product.oldPrice 
                 }
             </div>
         </div>

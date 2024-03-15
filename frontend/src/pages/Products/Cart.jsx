@@ -43,7 +43,7 @@ const Cart = () => {
     const total = ()=>{
       let sum = 0;
       carts.forEach((item) => {
-        sum += item.new_price * item.qnty;
+        sum += item.newPrice * item.qnty;
       });
       setPrice(sum);
     }  
@@ -116,7 +116,7 @@ const Cart = () => {
                             <td>
                               <button
                                 className="prdct-delete my-2"
-                                onClick={() => handleDecrement(data.id)}
+                                onClick={() => handleDecrement(data._id)}
                               >
                                 <DeleteForeverIcon></DeleteForeverIcon>
                               </button>
@@ -131,7 +131,7 @@ const Cart = () => {
                                 <p>{data.name}</p>
                               </div>
                             </td>
-                            <td className=" text-center font-semibold">₹{data.new_price}</td>
+                            <td className=" text-center font-semibold">₹{data.newPrice}</td>
                             <td>
                               <div className="prdct-qty-container">
                                 <button
@@ -139,7 +139,7 @@ const Cart = () => {
                                   type="button"
                                   onClick={
                                     data.qnty <= 1
-                                      ? () => handleDecrement(data.id)
+                                      ? () => handleDecrement(data._id)
                                       : () => handleSingleDecrement(data)
                                   }
                                 >
@@ -163,7 +163,7 @@ const Cart = () => {
                               </div>
                             </td>
                             <td className="text-right font-semibold">
-                              ₹ {data.qnty * data.new_price}
+                              ₹ {data.qnty * data.newPrice}
                             </td>
                           </tr>
                         

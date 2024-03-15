@@ -17,7 +17,7 @@ const cartSlice = createSlice({
         // add o cart
         addToCart : (state,action) => {
             // state.carts = [...state.carts, action.payload];
-            const itemIndex = state.carts.findIndex((item) => (item.id === action.payload.id));
+            const itemIndex = state.carts.findIndex((item) => (item._id === action.payload._id));
 
             if( itemIndex >= 0){
                 state.carts[itemIndex].qnty += 1;
@@ -31,20 +31,20 @@ const cartSlice = createSlice({
 
         // remove particular iteam
         removeFromCart : (state,action) => {
-            const data = state.carts.filter((ele) => (ele.id !== action.payload));
+            const data = state.carts.filter((ele) => (ele._id !== action.payload));
             state.carts = data;
             localStorage.setItem('carts', JSON.stringify(state.carts));
         },
 
         // remove single item
         removeSingleItems : (state,action) => {
-            const itemIndex = state.carts.findIndex((item) => (item.id === action.payload.id));
+            const itemIndex = state.carts.findIndex((item) => (item._id === action.payload.id));
 
             if( state.carts[itemIndex].qnty >=1 ){
                 state.carts[itemIndex].qnty -= 1;
             }
             else{
-                const data = state.carts.filter((ele) => (ele.id !== action.payload));
+                const data = state.carts.filter((ele) => (ele._id !== action.payload));
                 state.carts = data;
             }
             localStorage.setItem('carts', JSON.stringify(state.carts));

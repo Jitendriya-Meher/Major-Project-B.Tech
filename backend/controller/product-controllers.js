@@ -9,9 +9,9 @@ const addProduct = async ( req,res) => {
         oldPrice,
         newPrice,
         category,
-        quantity} = req.body;
+        qunatityRemaining} = req.body;
 
-        if( !file || !name || !description || !oldPrice || !newPrice || !category || !quantity ){
+        if( !file || !name || !description || !oldPrice || !newPrice || !category || !qunatityRemaining ){
             return res.json({
                 message: "Please enter all required fields",
                 success: false
@@ -26,7 +26,7 @@ const addProduct = async ( req,res) => {
             description,
             oldPrice,
             newPrice,
-            qunatityRemaining:quantity,
+            qunatityRemaining:qunatityRemaining,
             category
         });
 
@@ -82,4 +82,65 @@ const getSingleProduct = async (req, res) => {
     }
 }
 
-module.exports = { addProduct , getAllProducts, getSingleProduct};
+const deleteProduct = async (req, res) => {
+    try{
+        const { id} = req.params;
+
+        const product = await ProductModel.findByIdAndDelete(id);
+
+        return res.json({
+            message:"Product deleted successfully",
+            success: true,
+            product
+        });
+    }
+    catch(err){
+        return res.json({
+            message: err.message,
+            success: false
+        });
+    }
+}
+
+const editProduct = async ( req,res) => {
+    try{
+        const {id} = req.params;
+
+        const { name,
+        description,
+        oldPrice,
+        newPrice,
+        category,
+        qunatityRemaining} = req.body;
+
+        if( !name || !description || !oldPrice || !newPrice || !category || !qunatityRemaining ){
+            return res.json({
+                message: "Please enter all required fields",
+                success: false
+            });
+        }
+
+        const productData = await ProductModel.findByIdAndUpdate(id,{
+            name,
+            description,
+            oldPrice,
+            newPrice,
+            qunatityRemaining:qunatityRemaining,
+            category
+        });
+
+        return res.json({
+            message:"Product edited successfully",
+            success:true,
+            productData
+        });
+    }
+    catch(err){
+        return res.json({
+            message: err.message,
+            success: false
+        });
+    }
+}
+
+module.exports = { addProduct , getAllProducts, getSingleProduct, deleteProduct, editProduct};

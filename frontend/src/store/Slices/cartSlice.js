@@ -38,7 +38,7 @@ const cartSlice = createSlice({
 
         // remove single item
         removeSingleItems : (state,action) => {
-            const itemIndex = state.carts.findIndex((item) => (item._id === action.payload.id));
+            const itemIndex = state.carts.findIndex((item) => (item._id === action.payload._id));
 
             if( state.carts[itemIndex].qnty >=1 ){
                 state.carts[itemIndex].qnty -= 1;

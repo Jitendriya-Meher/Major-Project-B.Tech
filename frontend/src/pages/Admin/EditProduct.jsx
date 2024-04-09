@@ -1,14 +1,17 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const AddProducts = () => {
+const EditProduct = () => {
 
     const { baseURL, token} = useSelector((s)=>(s.auth));
     const [disableButton, setDissableButton] = useState(false);
     const navigate = useNavigate();
+    const [image,setImage] = useState("");
+
+    const {id} = useParams(); 
 
     const [productDetails, setProductDetails] = useState({
         name:"",
@@ -18,7 +21,6 @@ const AddProducts = () => {
         category: "",
         qunatityRemaining:""
     });
-    const [ image, setImage] = useState(null);
 
     const changeHandler =( e ) =>{
         const name = e.target.name;
@@ -31,6 +33,28 @@ const AddProducts = () => {
         ));
     }
 
+    const getProducts = async () => {
+        try {
+          const res = await axios.get(`${baseURL}/api/product/${id}`, {
+            headers: {
+              Authorization: token,
+            },
+          });
+          const data = await res.data;
+          console.log(data);
+    
+          if (data.success) {
+            toast.success(data.message);
+            setProductDetails(data.product);
+            setImage(data.product.image);
+          } else {
+            toast.error(data.message);
+          }
+        } catch (err) {
+          toast.error(err.message);
+        }
+      };
+
     const submitHandler = async (e) =>{
 
         setDissableButton(true);
@@ -38,20 +62,10 @@ const AddProducts = () => {
         try{
             e.preventDefault();
 
-            const formData = new FormData();
-            formData.append("image",image);
-            formData.append("name",productDetails.name);
-            formData.append("description",productDetails.description);
-            formData.append("oldPrice",productDetails.oldPrice);
-            formData.append("newPrice",productDetails.newPrice);
-            formData.append("category",productDetails.category);
-            formData.append("qunatityRemaining",productDetails.qunatityRemaining);
-
-            const res = await axios.post(`${baseURL}/api/product/addproduct`,
-            formData,{
+            const res = await axios.patch(`${baseURL}/api/product/edit/${id}`,
+            productDetails,{
                 headers:{
-                    Authorization: token,
-                    "Content-Type":"multipart/form-data"
+                    Authorization: token
                 }
             });
             const data = await res.data;
@@ -60,7 +74,7 @@ const AddProducts = () => {
 
             if( data.success){
                 toast.success(data.message);
-                navigate("/dashboard");
+                navigate("/admin/manage/product");
             }else{
                 toast.error(data.message);
             }
@@ -71,11 +85,19 @@ const AddProducts = () => {
         setDissableButton(false);
     }
 
+    useEffect(() => {
+        getProducts();
+    },[]);
+
   return (
     <div>
         <p className=' text-2xl text-center pb-4'>
-            Add Products
+            Edit Products
         </p>
+
+        <div className=" flex items-center justify-center pb-4">
+            <img src={image} className=' h-44 rounded-md' alt="" />
+        </div>
 
         <form className=" flex flex-col gap-3 w-full md:flex">
 
@@ -92,21 +114,6 @@ const AddProducts = () => {
                 name='name'
                 onChange={(e) => {
                     changeHandler(e);
-                }}
-                />
-            </label>
-
-            <label className="w-full" htmlFor='f'>
-                <p
-                className='text-[0.88rem] text-richblack-5 mb-1 leading-[1.38rem]'
-                >Product Image <span className='text-pink-200'>*</span></p>
-                <input type="file"
-                required
-                placeholder='Enter Product Image'
-                id='f'
-                className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[8px] border-b-[1px] outline-1'
-                onChange={(e)=>{
-                    setImage(e.target.files[0]);
                 }}
                 />
             </label>
@@ -185,7 +192,7 @@ const AddProducts = () => {
                 placeholder='Toatal Qunatity'
                 id='z'
                 className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[8px] border-b-[1px] outline-1'
-                value={productDetails.quantity}
+                value={productDetails.qunatityRemaining}
                 name='qunatityRemaining'
                 onChange={(e) => {
                     changeHandler(e);
@@ -200,7 +207,7 @@ const AddProducts = () => {
                 onClick={submitHandler}
                 >
                     <p className="text-[1.1rem]">
-                        Add Product
+                        Edit Product
                     </p>
             </button>
 
@@ -209,4 +216,4 @@ const AddProducts = () => {
   )
 }
 
-export default AddProducts
+export default EditProduct

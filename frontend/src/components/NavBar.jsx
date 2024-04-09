@@ -92,6 +92,12 @@ const NavBar = () => {
         }
         {
             isLoggedin &&
+            <NavLink to="/order">
+                <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Order</button>
+            </NavLink>
+        }
+        {
+            isLoggedin &&
             <NavLink to="/profile">
                 <button className='py-[8px] bg-richblack-800 px-[12px] rounded-[8px] border border-richblack-700'>Profile</button>
             </NavLink>

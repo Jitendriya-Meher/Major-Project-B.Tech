@@ -6,11 +6,47 @@ import { addToCart, emptyCartItem, removeFromCart, removeSingleItems } from "../
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import axios from "axios";
+import { useNavigate} from "react-router-dom";
 
 const Cart = () => {
 
     const {carts} = useSelector((state)=>state.cart);
+    const { baseURL, token } = useSelector((s) => s.auth);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const addOrder = async () => {
+      const conf = window.confirm('Are you sure you want to Purchase this order?');
+      if( !conf ){
+        return;
+      }
+      try{
+        const res = await axios.post(`${baseURL}/api/order/add`,{
+          carts,
+          totalPrice: totalprice,
+          totalQnty : totalquantity
+        },{
+          headers: {
+            Authorization: token,
+          },
+        });
+        const data = await res.data;
+        console.log("order",data);
+
+        if( data.success){
+          toast.success(data.message);
+          dispatch(emptyCartItem());
+          navigate(`/order/${data.orderDB._id}`);
+        }
+        else{
+          toast.error(data.message);
+        }
+      }
+      catch(err){
+        toast.error(err.message);
+      }
+    }
 
     
     const [totalprice,setPrice] = useState(0);
@@ -35,6 +71,10 @@ const Cart = () => {
     
     // empty cart
     const emptycart = ()=>{
+      const conf = window.confirm("Are you sure you want to Empty your cart?");
+      if( !conf ){
+        return;
+      }
       dispatch(emptyCartItem());
       toast.success("Your Cart is Empty");
     }
@@ -184,6 +224,7 @@ const Cart = () => {
                       </th>
                       <th className="text-right">
                         <button className=" bg-green-700 px-3 py-2 rounded-md mt-3" type="button"
+                        onClick={addOrder}
                         >
                           CheckOut
                         </button>

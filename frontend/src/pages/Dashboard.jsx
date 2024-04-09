@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-// import all_product from "../assets/all_product";
 import ProductItem from "../components/Products/ProductItem";
 import { toast } from "react-toastify";
 import axios from "axios";

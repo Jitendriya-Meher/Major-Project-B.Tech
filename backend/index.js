@@ -27,11 +27,15 @@ dbConnect();
 const authRoutes = require("./routes/auth-routes");
 const userRoutes = require("./routes/user-routes");
 const productRoutes = require("./routes/product-routes");
+const orderRoutes = require("./routes/order-routes");
+const orderChatRoutes = require("./routes/order-chat-routes");
 
 // mount routes
 app.use("/api/auth",authRoutes);
 app.use("/api/user",userRoutes);
 app.use("/api/product",productRoutes);
+app.use("/api/order",orderRoutes);
+app.use("/api/order/chat",orderChatRoutes);
 
 
 app.get('/',(req,res)=>{

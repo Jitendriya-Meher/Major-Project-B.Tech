@@ -21,6 +21,13 @@ import Product from "./pages/Products/Product";
 import Cart from "./pages/Products/Cart";
 import AdminRoutes from "./components/AdminRoutes";
 import AddProducts from "./components/Admin/AddProducts";
+import Order from "./pages/Order/Order";
+import SingleOrder from "./pages/Order/SingleOrder";
+import ManageProduct from "./pages/Admin/ManageProduct";
+import EditProduct from "./pages/Admin/EditProduct";
+import ManageOrders from "./pages/Admin/ManageOrders";
+import ManageSingleOrder from "./pages/Order/ManageSingleOrder";
+import AdminRef from "./components/Admin/AdminRef";
 
 function App() {
 
@@ -74,8 +81,26 @@ function App() {
           </AdminPage>
         </AdminRoutes>
       }>
+        <Route path="/admin" element={<AdminRef></AdminRef>}></Route>
         <Route path="/admin/addproducts" element={<AddProducts></AddProducts>}></Route>
+        <Route path="/admin/manage/product" element={<ManageProduct></ManageProduct>}></Route>
+        <Route path="/admin/manage/product/:id" element={<EditProduct></EditProduct>}></Route>
+        <Route path="/admin/manage/order" element={<ManageOrders></ManageOrders>}></Route>
       </Route>
+
+      <Route path="/admin/manage/order/:id" element={<ManageSingleOrder></ManageSingleOrder>}></Route>
+
+      <Route path="/order" element={
+        <PrivateRoute>
+          <Order></Order>
+        </PrivateRoute>
+      }></Route>
+
+      <Route path="/order/:id" element={
+        <PrivateRoute>
+          <SingleOrder></SingleOrder>
+        </PrivateRoute>
+      }></Route>
 
     </Routes>
 

@@ -1,5 +1,51 @@
+const { response } = require("express");
 const OrderModal = require("../models/order-model");
 const UserModel = require("../models/user-model");
+
+require("dotenv").config();
+const STRIP_KEY = process.env.STRIP_KEY || "";
+
+const stripe = require('stripe')(STRIP_KEY);
+
+const makePayment = async ( req, res) => {
+    
+    try{
+        
+        const {carts} = req.body;
+
+        const lineItems = carts.map((product)=>({
+            price_data:{
+                currency:"inr",
+                product_data:{
+                    name:product.name,
+                    images:[product.image]
+                },
+                unit_amount:product.newPrice * 100,
+            },
+            quantity:product.qnty
+        }));
+    
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types:["card"],
+            line_items:lineItems,
+            mode:"payment",
+            success_url:"http://localhost:3000/success",
+            cancel_url:"http://localhost:3000/cancel",
+        })
+    
+        return res.json({
+            id:session.id,
+            message:"payment done",
+            success:true
+        });
+    }
+    catch(err){
+        return res.json({
+            message: err.message,
+            success: false
+        });
+    }
+}
 
 const addOrder = async (req,res) => {
     try{
@@ -7,7 +53,7 @@ const addOrder = async (req,res) => {
         const { userId} = req;
         const {carts, totalPrice, totalQnty} = req.body;
 
-        const userData = await UserModel.findById(userId);
+        const userData = await UserModel.findById( userId );
 
         const orderDB = await OrderModal.create({
             cart:carts,
@@ -175,4 +221,4 @@ const updateOrder = async (req,res) => {
     }
 }
 
-module.exports = { addOrder,getAllOrders,getSingleOrders,editDelivery,deleteOrder, getOrders, updateOrder};
+module.exports = { addOrder,getAllOrders,getSingleOrders,editDelivery,deleteOrder, getOrders, updateOrder, makePayment};

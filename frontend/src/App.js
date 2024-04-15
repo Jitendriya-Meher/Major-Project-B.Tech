@@ -30,6 +30,7 @@ import ManageSingleOrder from "./pages/Order/ManageSingleOrder";
 import AdminRef from "./components/Admin/AdminRef";
 import ManageContacts from "./pages/Admin/ManageContacts";
 import ReplyContact from "./pages/Admin/ReplyContact";
+import SuccessPayment from "./pages/Products/SuccessPayment";
 
 function App() {
 
@@ -108,6 +109,12 @@ function App() {
       <Route path="/admin/contact/:id" element={
         <PrivateRoute>
           <ReplyContact></ReplyContact>
+        </PrivateRoute>
+      }></Route>
+
+      <Route path="/success" element={
+        <PrivateRoute>
+          <SuccessPayment></SuccessPayment>
         </PrivateRoute>
       }></Route>
 

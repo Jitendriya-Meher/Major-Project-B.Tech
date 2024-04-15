@@ -7,14 +7,14 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import axios from "axios";
-import { useNavigate} from "react-router-dom";
+
+import { loadStripe } from "@stripe/stripe-js";
 
 const Cart = () => {
 
     const {carts} = useSelector((state)=>state.cart);
-    const { baseURL, token } = useSelector((s) => s.auth);
+    const { baseURL } = useSelector((s) => s.auth);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const addOrder = async () => {
       const conf = window.confirm('Are you sure you want to Purchase this order?');
@@ -22,22 +22,20 @@ const Cart = () => {
         return;
       }
       try{
-        const res = await axios.post(`${baseURL}/api/order/add`,{
-          carts,
-          totalPrice: totalprice,
-          totalQnty : totalquantity
-        },{
-          headers: {
-            Authorization: token,
-          },
+        const stripe = await loadStripe("pk_test_51OH6DHSFpMc9DkG6Ar3XL1DUOAir2N8dClQbrpkUgSsVkIDGZQiajuBgXOAAaLJzyAri8FABpUpJF3GC3pfj4KVp00caNNGeRm");
+
+        const res = await axios.post(`${baseURL}/api/order/payment`,{
+          carts
         });
         const data = await res.data;
         console.log("order",data);
 
+        const result = await stripe.redirectToCheckout({
+          sessionId:data.id
+        });
+
         if( data.success){
-          toast.success(data.message);
-          dispatch(emptyCartItem());
-          navigate(`/order/${data.orderDB._id}`);
+            toast.success(data.message);
         }
         else{
           toast.error(data.message);

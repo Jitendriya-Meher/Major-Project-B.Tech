@@ -69,11 +69,16 @@ const ManageProduct = () => {
 
   return (
     <div>
+
+      <p className=" mb-4 text-center text-white text-3xl">
+        Products 
+      </p>
+
         <div className=" flex flex-col gap-2">
             {
                 products.map((product) => (
-                    <div className=" bg-gray-800/80 px-4 py-2 flex justify-between items-center gap-4 rounded-md" key={product._id}>
-                        <div className="">
+                    <div className=" bg-gray-800/80 px-4 py-2 flex justify-between items-center gap-4 rounded-md border border-gray-700/80" key={product._id}>
+                        <div className=" p-1 border border-slate-800 rounded-md bg-gray-700">
                             <img src={product.image} className=" h-28 rounded-md" alt="" />
                         </div>
                         <div className=" text-[1.2rem]">

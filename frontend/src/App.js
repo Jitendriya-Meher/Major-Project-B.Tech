@@ -28,6 +28,8 @@ import EditProduct from "./pages/Admin/EditProduct";
 import ManageOrders from "./pages/Admin/ManageOrders";
 import ManageSingleOrder from "./pages/Order/ManageSingleOrder";
 import AdminRef from "./components/Admin/AdminRef";
+import ManageContacts from "./pages/Admin/ManageContacts";
+import ReplyContact from "./pages/Admin/ReplyContact";
 
 function App() {
 
@@ -86,6 +88,7 @@ function App() {
         <Route path="/admin/manage/product" element={<ManageProduct></ManageProduct>}></Route>
         <Route path="/admin/manage/product/:id" element={<EditProduct></EditProduct>}></Route>
         <Route path="/admin/manage/order" element={<ManageOrders></ManageOrders>}></Route>
+        <Route path="/admin/manage/contacts" element={<ManageContacts></ManageContacts>}></Route>
       </Route>
 
       <Route path="/admin/manage/order/:id" element={<ManageSingleOrder></ManageSingleOrder>}></Route>
@@ -99,6 +102,12 @@ function App() {
       <Route path="/order/:id" element={
         <PrivateRoute>
           <SingleOrder></SingleOrder>
+        </PrivateRoute>
+      }></Route>
+
+      <Route path="/admin/contact/:id" element={
+        <PrivateRoute>
+          <ReplyContact></ReplyContact>
         </PrivateRoute>
       }></Route>
 

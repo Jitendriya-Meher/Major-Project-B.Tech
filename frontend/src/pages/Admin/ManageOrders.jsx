@@ -39,10 +39,13 @@ const ManageOrders = () => {
 
   return (
     <div>
+        <p className=" mb-4 text-center text-white text-3xl">
+            Order History 
+        </p>
         <div className="">
             {
                 orders.map((order) => (
-                        <div className=" mt-2 mb-4 p-4 bg-gray-800/40 rounded-md w-full flex items-center justify-between" key={order._id}>
+                        <div className=" mt-2 mb-4 p-4 bg-gray-800/40 rounded-md w-full flex items-center justify-between border border-gray-800" key={order._id}>
 
                             <div className=" text-white flex flex-col gap-2">
                                 {

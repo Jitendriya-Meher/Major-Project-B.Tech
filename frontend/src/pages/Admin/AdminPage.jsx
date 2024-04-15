@@ -22,6 +22,11 @@ const AdminPage = () => {
                     Manage Orders
                 </button>
             </NavLink>
+            <NavLink to="/admin/manage/contacts" className=" md:w-full">
+                <button className='py-[8px] px-[12px] rounded-[8px] border border-richblack-700 w-full bg-purple-900'>
+                    Manage Contacts
+                </button>
+            </NavLink>
 
         </div>
         <div className=" flex-1 md:min-w-[400px] bg-gray-900 md:min-h-[70vh] px-4 py-8 rounded-md border border-gray-800">

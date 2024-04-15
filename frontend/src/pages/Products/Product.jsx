@@ -66,6 +66,10 @@ const Product = () => {
     getProducts();
   }, []);
 
+  useEffect(()=>{
+    speechSynthesis.cancel();
+  },[id]);
+  
   if (!product) {
     return <div className=" text-center my-4 text-2xl">
       Loading...
@@ -141,7 +145,7 @@ const Product = () => {
         </div>
         </div>
 
-        {product && <button className=" text-white p-4 rounded-full bg-blue-900 fixed right-10 bottom-10"
+        {product && <button className={`text-white p-4 rounded-full fixed right-10 bottom-10 ${ speak ? " bg-blue-800" : " bg-red-800"}`}
         onClick={describeProduct}>
           <CampaignIcon></CampaignIcon>
         </button>}

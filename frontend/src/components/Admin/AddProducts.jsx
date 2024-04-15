@@ -131,7 +131,7 @@ const AddProducts = () => {
                 <p
                 className='text-[0.88rem] text-richblack-5 mb-1 leading-[1.38rem]'
                 >Product Category <span className='text-pink-200'>*</span></p>
-                <input type="text"
+                <select
                 required
                 placeholder='Enter Product Category'
                 id='e'
@@ -141,7 +141,23 @@ const AddProducts = () => {
                 onChange={(e) => {
                     changeHandler(e);
                 }}
-                />
+                >
+                    <option value="Others" className=' p-2 my-1'>
+                        Others
+                    </option>
+                    <option value="Mens Cloths" className=' p-2 my-1'>
+                        Mens Cloths
+                    </option>
+                    <option value="Womens Cloths" className=' p-2 my-1'>
+                        Womens Cloths
+                    </option>
+                    <option value="Kids Cloths" className=' p-2 my-1'>
+                        Kids Cloths
+                    </option>
+                    <option value="Electronics" className=' p-2 my-1'>
+                        Electronics
+                    </option>
+                </select>
             </label>
             <label className="w-full" htmlFor='c'>
                 <p

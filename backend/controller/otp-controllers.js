@@ -163,4 +163,53 @@ const generateOtpForgotonPassword = async (req, res) => {
     }
 }
 
-module.exports = { genetrateOTPSignup, generateOtpForgotonPassword};
+const generateEmailContact = async (req, res) => {
+    try{    
+
+        const { email, query, response, username } = req.body;
+
+        if( !email || !query || !response){
+            return res.json({
+                message:"Please fill all required fields",
+                success: false
+            });
+        }
+
+        const info = await transporter.sendMail({
+            from: "jitenkvk@gmail.com", // sender address
+            to: email, // list of receivers
+            subject: "Respone to your query", // Subject line
+            html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+                        <div style="margin:50px auto;width:70%;padding:20px 0">
+                        <div style="border-bottom:1px solid #eee">
+                            <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">${projectName}</a>
+                        </div>
+                        <p style="font-size:1.1em">Hi, ${username}</p>
+                        <p>Thank you for choosing ${projectName}. The response to your query ${query} is</p>
+                        <p style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${response}</p>
+                        <p style="font-size:0.9em;">Regards,<br /><p>${projectName}</p>
+                        <hr style="border:none;border-top:1px solid #eee" />
+                        <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                            <p>${projectName} Inc</p>
+                            <p>Maruti Nagar</p>
+                            <p>Khariar</p>
+                        </div>
+                        </div>
+                    </div>`, // html body   
+        });
+
+        return res.json({
+            success: true,
+            message: `Response send to user email successfully`,
+        });
+
+    }
+    catch(err){
+        return res.json({
+            success: false,
+            message: err.message
+        });
+    }
+}
+
+module.exports = { genetrateOTPSignup, generateOtpForgotonPassword, generateEmailContact};

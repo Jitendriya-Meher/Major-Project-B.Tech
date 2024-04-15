@@ -1,8 +1,9 @@
 .item{
-    width: 350px;
+    width: 300px;
     border-radius: 5px;
     overflow: hidden;
     transition: 0.2s ease-in-out;
+    text-align: center;
 }
 
 .item p{
@@ -11,7 +12,9 @@
 
 .item-prices{
     display: flex;
-    gap: 20px;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
 }
 
 .item-price-new{

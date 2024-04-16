@@ -41,16 +41,14 @@ const Contact = () => {
 
         <div className="w-11/12 max-w-[570px] mx-auto">
             <h1 className='text-richblack-5 font-semibold text-[1.8rem] leading-[2.3rem]'>
-              title
+              Ask Your Query here...
             </h1>
             <p className='text-[0.9rem] leading-[1.2rem] mt-4'>
                 <span className='text-richblack-100'>
-                  description1
+                For any inquiries or feedback regarding the MERN Ecommerce project, please don't hesitate to reach out to our team. You can contact us via email at jitenkvk@gmail.com | samikshya.nanda.4848@gmail.com or submit a message through our online contact form. We're committed to providing prompt and helpful assistance to ensure the continued success of this ecommerce platform.
                 </span>
                 <br />
-                <span className='text-blue-500 italic'>
-                    description2
-                </span>
+                
             </p>
 
             <form action=""

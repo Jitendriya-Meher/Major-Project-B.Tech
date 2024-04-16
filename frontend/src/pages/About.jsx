@@ -11,17 +11,17 @@ const About = () => {
               About This Project
             </h1>
 
-            <p className='text-[0.9rem] leading-[1.2rem] mt-4 text-justify text-gray-300'>
-            This is a note-taking site developed using the MERN stack—MongoDB, Express.js, React, and Node.js—offers a robust and efficient platform for users to organize and manage their notes in a dynamic and responsive environment. The MongoDB database provides a scalable and flexible structure for storing notes, allowing for seamless expansion as users create and accumulate content. Express.js serves as the backend framework, facilitating the creation of a secure and performant API that connects the frontend and the database.
+            <p className='text-[0.9rem] leading-[1.2rem] mt-6 text-justify text-gray-300'>
+            This MERN Ecommerce Project is a comprehensive and ambitious endeavor undertaken by Jitendriya Meher and Samikshya Nanda, two fourth-year students from the Computer Science and Engineering (CSE) branch. This major project aims to design and develop a cutting-edge ecommerce website that leverages the power of the MERN (MongoDB, Express.js, React.js, Node.js) stack.
             <br />
             <br />
-            The React.js frontend delivers a modern and interactive user interface, enabling users to intuitively create, edit, and organize their notes. The component-based architecture of React enhances the development process, fostering modular design and reusability. Through the use of React's state management, the application provides a responsive and real-time experience for users, ensuring that changes are immediately reflected without the need for page reloads.
+            We are driven by their passion for technology and entrepreneurship, have come together to create a transformative online shopping platform that caters to the evolving needs of both customers and business owners. Recognizing the growing importance of ecommerce in the digital landscape, they have dedicated their efforts to building a robust, user-friendly, and secure ecommerce solution that will leave a lasting impact.
             <br />
             <br />
-            Node.js powers the server-side logic, ensuring swift and non-blocking operations. Its event-driven architecture aligns seamlessly with the dynamic nature of a note-taking site, enabling concurrent handling of multiple user interactions. The MERN stack's full-stack JavaScript environment streamlines development, fostering code consistency and collaboration across the frontend and backend.
+            Through this project, We seek to showcase our technical expertise, problem-solving abilities, and commitment to academic integrity. By combining the versatility of the MERN stack with a focus on user experience, security, and responsible development practices, We aspire to deliver a ecommerce platform that sets new standards in the industry.
             <br />
             <br />
-            As users navigate the note-taking site, they experience a fluid and engaging interface that leverages the MERN stack's capabilities. The site incorporates features such as folder organization, real-time collaboration, and multimedia support. The seamless integration of the MERN technologies ensures a scalable, efficient, and user-friendly note-taking experience, embodying the synergy of these technologies to create a cohesive and powerful application.
+            The MERN Ecommerce Project represents a culmination of our academic journey and a testament to our dedication to creating innovative solutions that make a tangible difference. As fourth-year CSE students, We have leveraged our knowledge, skills, and teamwork to bring this ambitious project to life, showcasing our potential as future leaders in the field of web development and digital entrepreneurship.
             </p>
 
         </div>

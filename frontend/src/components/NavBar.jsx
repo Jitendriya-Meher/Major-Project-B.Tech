@@ -47,7 +47,7 @@ const NavBar = () => {
 
      <Link to='/' className=' mx-auto flex gap-1 justify-center items-center text-white text-xl font-semibold'>
         <img src={logo} alt='logo' width={64} height={64} className=' rounded-full' loading='lazy'></img>
-        <span>shopaholics.in</span>
+        <span>shopaholics</span>
      </Link>
 
      <nav className='navbar mx-auto'>

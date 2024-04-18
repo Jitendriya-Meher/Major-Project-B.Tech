@@ -42,4 +42,4 @@ app.use("/api/contact",contactRoute);
 
 app.get('/',(req,res)=>{
     res.send(`<h1>Welcome To MERN Project Jitendriya !!!</h1>`)
-})
+});

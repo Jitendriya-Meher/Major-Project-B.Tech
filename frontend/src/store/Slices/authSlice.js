@@ -9,7 +9,7 @@ const initialState = {
   phone: localStorage.getItem("phone") || "",
   loading:false,
   isAdmin:  localStorage.getItem("isAdmin") == "true",
-  baseURL: "http://localhost:4000"
+  baseURL: "https://major-project-backend-b-tech-1.onrender.com"
 };
 
 export const authSlice = createSlice({

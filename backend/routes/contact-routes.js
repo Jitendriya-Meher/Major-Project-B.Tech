@@ -8,6 +8,6 @@ router.route("/").post(contactUs);
 router.route("/all").get(authMiddleware,getAllContacts);
 router.route("/:id").delete(authMiddleware,deleteUserContact);
 router.route("/:id").get(authMiddleware,getUserContact);
-router.route("/reply").post(authMiddleware,generateEmailContact);
+router.route("/reply").post(generateEmailContact);
 
 module.exports = router;

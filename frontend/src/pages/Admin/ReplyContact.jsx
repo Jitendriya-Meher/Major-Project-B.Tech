@@ -51,10 +51,11 @@ const ReplyContact = () => {
   const sendResponse = async () => {
     setDisableButton(true);
     try{
-      const res = await axios.post(`${baseURL}/api/admin/contact/${id}`,{
+      const res = await axios.post(`${baseURL}/api/contact/reply`,{
         email: contact.email,
         query: contact.message,
-        response
+        response,
+        username: contact.username
       },{
         headers:{
           Authorization: token
